@@ -1,0 +1,10 @@
+# build output
+*.o
+*.elf
+*.bak
+
+# disk image (8 MB, created by you; see quick_start.txt)
+disk.img
+
+# accidental nested copy of the project folder
+mykernel/

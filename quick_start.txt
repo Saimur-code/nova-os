@@ -1,0 +1,48 @@
+NOVA QUICK START (Termux on Android)
+====================================
+
+1. Install the tools
+   pkg update
+   pkg install clang lld nasm make binutils git qemu-system-x86-64-headless
+
+2. Create an empty 8 MB disk (only needed once)
+   dd if=/dev/zero of=disk.img bs=1M count=8
+
+3. Build
+   make
+
+4. Run
+   make run
+
+5. First boot
+   If Nova says "not formatted yet", type:
+     format yes
+   (This erases the disk image.)
+
+6. Try these commands at the nova> prompt
+   help                 list all commands
+   hello                say hello
+   run hello            run a program in user mode (ring 3)
+   run evil1            a bad program attacks the kernel; Nova stops it
+   mem                  memory info
+   spawn count          start a background task
+   ps                   list tasks
+   write notes hello    create a file (see help for exact usage)
+   ls                   list files
+
+7. Quit
+   Press Ctrl+A, release, then press X.
+   Note: this kills QEMU instantly, so a pending disk write can be
+   lost. Copy disk.img to disk.img.bak before big experiments.
+
+REBUILD AFTER CHANGES
+---------------------
+   make clean
+   make run
+
+TROUBLESHOOTING
+---------------
+- Boots but says "not formatted yet" on a disk that has files:
+  check that CFLAGS in the Makefile contains -fno-strict-aliasing.
+- "qemu-system-x86-64 has no installation candidate":
+  use the package name qemu-system-x86-64-headless.
